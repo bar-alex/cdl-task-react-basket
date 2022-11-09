@@ -8,7 +8,7 @@ const ProductList = () => {
 
 	return (
 		<details>
-			<summary>List of products</summary>
+			<summary className="subtitle">List of products</summary>
 			<pre>
 				<div>{"SKU  | price | offer      | single "}</div>
 

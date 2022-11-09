@@ -15,7 +15,6 @@
 
 - components:
     - ProductList - shows the SKUs and offers available
-    - EntryForm - input sku, qty
-    - Basket - displays the list of 'bought' items 
-        - BasketItem - individual item in the basket -- allow change qty / delete on hover
-        - BasketTotal - shows the calculated total -- (?) and savings from offers
+    - InputForm - input sku, qty, add validations, data goes into basket[]
+    - BasketItem - individual item in the basket -- can delete
+    - BasketTotal - shows the calculated total -- (?) and savings from offers

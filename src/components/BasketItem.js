@@ -10,8 +10,8 @@ const BasketItem = ({ index, item, deleteFromBasket }) => {
 			<div className="basket-item">
 				<div>{item.sku}</div>
 				<div>{item.qty}</div>
-				<div>{item.price}</div>
-                <div>{item.value}</div>
+				<div>£{ (item.price/100).toFixed(2) }</div>
+                <div>£{ (item.value/100).toFixed(2) }</div>
 				<button onClick={() => deleteFromBasket(index)}>delete</button>
 			</div>
 		</>

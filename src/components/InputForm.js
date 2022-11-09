@@ -35,6 +35,7 @@ const InputForm = ({ validateProductSKU, addToBasket }) => {
 					id="sku"
 					name="sku"
 					required
+					autoComplete="off"
 					// style={{ textTransform: "uppercase" }}
 					// style={ () => "text-transform: uppercase" }
 					value={sku}
@@ -59,7 +60,7 @@ const InputForm = ({ validateProductSKU, addToBasket }) => {
 				<button onClick={(e) => resetFields()}>Reset</button>
 			</div>
 
-			{invalidSKU && <p id="message-invalid-sku">The product doesn't exist!</p>}
+			{invalidSKU && <p className=".warning-message">The product doesn't exist!</p>}
 		</form>
 	);
 };

@@ -10,9 +10,10 @@
 //     });
 //   });
 
-import { getProductSKU, validateProductSKU } from "./functions";
+import { getProductFromSKU, validateProductSKU } from "./functions";
 
-describe("", () => {
+
+describe("Retrieving and validating SKUs", () => {
 	it("retrieves product with SKU 'B'", () => {
 		const productB = {
 			sku: "B",
@@ -20,7 +21,7 @@ describe("", () => {
 			offer: "2 for 45",
 			singleOffer: false,
 		};
-		expect(getProductSKU('B')).toEqual(productB);
+		expect(getProductFromSKU('B')).toEqual(productB);
 	});
     it("validates product with SKU 'C'", () => {
         expect(validateProductSKU('C')).toStrictEqual(true);
@@ -29,3 +30,5 @@ describe("", () => {
         expect(validateProductSKU('H')).toStrictEqual(false);
     })
 });
+
+
