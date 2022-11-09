@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./App.css";
 
 import ProductList from "./components/ProductList";
@@ -6,87 +6,100 @@ import InputForm from "./components/InputForm";
 import BasketItem from "./components/BasketItem";
 import BasketTotal from "./components/BasketTotal";
 
-//const products = JSON.parse( '../data/products.json' );
-const products = [
-	{
-		sku: "A",
-		price: 50,
-		offer: "3 for 130",
-		singleOffer: false,
-	},
-];
+import {
+  retrieveProducts,
+	getProductSKU,
+	validateProductSKU,
+} from "./components/functions";
 
+// //const products = JSON.parse( '../data/products.json' );
+// const products = [
+// 	{
+// 		sku: "A",
+// 		price: 50,
+// 		offer: "3 for 130",
+// 		singleOffer: false,
+// 	},
+// ];
 
 const App = () => {
+
+  // {sku, qty, price, value}
 	const [basket, setBasket] = useState([]);
-	// {sku, qty, price, value}
 
-	// makes sure sku exists
-	const validateProduct = (skuToCheck) =>
-		products.filter(
-			({ sku }) => sku.toUpperCase() === skuToCheck.trim().toUpperCase()
-		).length > 0;
-
-
-	// calc value and
+	// add SKU + qty to basket
 	const addToBasket = ({ sku, qty }) => {
-		if (!validateProduct(sku) || qty === 0) {
-			console.log(
-				"err: addToBasket => sku is invalid or qty is 0 => ",
-				sku,
-				qty
-			);
+    console.log('addToBasket - arguments',sku, qty  );
+
+		if (!validateProductSKU(sku) || qty <= 0) {
+			console.log("err:addToBasket => SKU is invalid or qty < 1 => ", sku, qty);
 			return;
 		}
 
-		const productSKU = products.filter(
-			({ sku: prodSKU }) => prodSKU.toUpperCase() === sku.trim().toUpperCase()
-		);
+		const product = getProductSKU(sku);
 
-		if (productSKU.length !== 1) {
-			console.log(
-				"err: addToBasket => sku code didn't returned a single product => ",
-				sku,
-				productSKU
-			);
+		if (product === null) {
+			console.log("err:addToBasket => SKU code didn't returned a product => ",sku,product);
 			return;
 		}
 
-		setBasket(...basket, {
+		setBasket( [...basket, {
 			sku,
 			qty,
-			price: productSKU[0].price,
-			value: qty * productSKU[0].price,
-		});
+			price: product.price,
+			value: product.price * qty,
+		}]);
+
+    calculateTotal()
 	};
 
-	const deleteFromBasket = (indexToDelete) =>
-		setBasket(basket.filter((element, index) => index !== indexToDelete));
+
+	const deleteFromBasket = (indexToDelete) => 
+		setBasket( [...basket.filter((element, index) => index !== indexToDelete)] );
+
+
+  const calculateTotal = () => {
+    const skuCollection = {}; 
+    basket.forEach( 
+      ( element ) => skuCollection[element.sku] += skuCollection[element.qty] 
+    )
+    console.log( 'calculateTotal => ', skuCollection );
+  }
+  
+
+  // useEffect( () => console.log('useEffect called') , basket)
+
 
 	return (
 		<div className="app-container">
-
-      <p> This is a App test</p>
+			{/* <p> This is a App test</p> */}
 
 			<ProductList />
 
-			<InputForm validateProduct={validateProduct} addToBasket={addToBasket} />
+			<InputForm
+				validateProductSKU={validateProductSKU}
+				addToBasket={addToBasket}
+			/>
 
 			{basket.length === 0 && (
 				<p id="message-empty-basket">The basket is empty</p>
 			)}
 
-			<ul classNAme="basket-list">
+			<ul id="basket-list">
 				{basket.length > 0 &&
-					basket.forEach((element, index) => (
+					basket.map((element, index) => (
 						<li className="basket-line">
-							<BasketItem key={index} index={index} item={element} />
+							<BasketItem
+								key={index}
+								index={index}
+								item={element}
+								deleteFromBasket={deleteFromBasket}
+							/>
 						</li>
 					))}
 			</ul>
 
 			<BasketTotal />
-
 		</div>
 	);
 };
