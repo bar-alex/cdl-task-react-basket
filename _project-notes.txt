@@ -1,0 +1,20 @@
+- checkout system, with a basket, that uses a product list having "3 for 150" type of offers
+- no database, no servers, minimum boilerplate
+
+- rough estimate you took on this challenge
+- explain key decisions and potential improvements
+
+
+===============
+
+- products list loaded form a json file: 
+    {sku, price, offer (x for y), justOne}
+
+- basket will hold list of purchased items -- (?) cumulate qty on unique sku lines
+    {sku, qty, price, value, extraText}
+
+- components:
+    - EntryForm - input sku, qty
+    - Basket - displays the list of 'bought' items 
+        - BasketItem - individual item in the basket -- allow change qty / delete on hover
+        - BasketTotal - shows the calculated total -- (?) and savings from offers
