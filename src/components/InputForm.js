@@ -3,7 +3,7 @@ import React, { useState } from "react";
 // props.validateProduct( sku )     -- checks sku exists
 // props.addToBasket( {sku, qty} )  -- will do calcs and add it to basket list
 
-const EntryForm = ({ validateProduct, addToBasket }) => {
+const InputForm = ({ validateProduct, addToBasket }) => {
 	const [sku, setSku] = useState("");
 	const [qty, setQty] = useState(0);
 
@@ -27,14 +27,14 @@ const EntryForm = ({ validateProduct, addToBasket }) => {
 	};
 
 	return (
-		<form onSubmit={handleSubmit}>
+		<form id="input-form" onSubmit={handleSubmit}>
 			<label for="sku">SKU: </label>
 			<input
 				type="text"
 				id="sku"
 				name="sku"
 				required
-                style="text-transform: uppercase"
+                // style={ () => "text-transform: uppercase" }
 				value={sku}
 				onChange={(e) => setSku(e.target.value)}
 			/>
@@ -52,9 +52,9 @@ const EntryForm = ({ validateProduct, addToBasket }) => {
 			<button type="submit">Buy</button>
 			<button onClick={(e) => resetFields()}>Reset</button>
 
-			{invalidSKU && <p id="invalid-sku">The product doesn't exist!</p>}
+			{invalidSKU && <p id="message-invalid-sku">The product doesn't exist!</p>}
 		</form>
 	);
 };
 
-export default EntryForm;
+export default InputForm;
