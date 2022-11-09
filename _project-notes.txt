@@ -14,6 +14,7 @@
     {sku, qty, price, value, extraText}
 
 - components:
+    - ProductList - shows the SKUs and offers available
     - EntryForm - input sku, qty
     - Basket - displays the list of 'bought' items 
         - BasketItem - individual item in the basket -- allow change qty / delete on hover
