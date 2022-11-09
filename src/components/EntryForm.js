@@ -34,6 +34,7 @@ const EntryForm = ({ validateProduct, addToBasket }) => {
 				id="sku"
 				name="sku"
 				required
+                style="text-transform: uppercase"
 				value={sku}
 				onChange={(e) => setSku(e.target.value)}
 			/>
