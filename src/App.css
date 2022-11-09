@@ -6,9 +6,7 @@
   outline: 2px solid blueviolet;
 }
 
-/* .app-container summary {
-  text-align: left;
-} */
+
 
 #input-form {
   margin: 10px -10px 10px -10px;
@@ -38,11 +36,24 @@
   margin-right: 5px;
 }
 
+/* #basket-list {
 
-#input-form  label {
-  width: 30%;
+} */
+
+#basket-list li {
+  list-style-type: none;
 }
 
-#iknput-form  input {
-  width: 70%;
+
+.basket-item {
+  display: flex;
+  justify-content: space-between;
 }
+
+/* .basket-item button {
+  visibility: hidden;
+}
+
+.basket-item:hover {
+  visibility: visible;
+} */

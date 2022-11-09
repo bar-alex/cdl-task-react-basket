@@ -22,8 +22,8 @@ const InputForm = ({ validateProductSKU, addToBasket }) => {
 	};
 
 	const resetFields = () => {
-		setSku("");
-		setQty(""); // 0?
+		setSku('');
+		setQty(''); // 0?
 	};
 
 	return (
@@ -35,10 +35,10 @@ const InputForm = ({ validateProductSKU, addToBasket }) => {
 					id="sku"
 					name="sku"
 					required
-					style={{ textTransform: "uppercase" }}
+					// style={{ textTransform: "uppercase" }}
 					// style={ () => "text-transform: uppercase" }
 					value={sku}
-					onChange={(e) => setSku(e.target.value)}
+					onChange={(e) => setSku(e.target.value.toString().toUpperCase())}
 				/>
 			</div>
 
@@ -50,7 +50,7 @@ const InputForm = ({ validateProductSKU, addToBasket }) => {
 					name="qty"
 					required
 					value={qty}
-					onChange={(e) => setQty(e.target.value)}
+					onChange={(e) => setQty( +e.target.value)}
 				/>
 			</div>
 
