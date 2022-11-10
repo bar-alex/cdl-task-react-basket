@@ -56,10 +56,10 @@
 }
 
 
-#basket-total {
+/* #basket-total {
   outline: 2px solid blueviolet;
   margin: 10px -10px;
-}
+} */
 
 
 .subtitle {
@@ -72,5 +72,9 @@
 }
 
 .warning-message {
+  color: salmon;
+}
 
+.savings-offer {
+  font-size: 0.8rem;
 }

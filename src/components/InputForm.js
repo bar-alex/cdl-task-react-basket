@@ -22,8 +22,8 @@ const InputForm = ({ validateProductSKU, addToBasket }) => {
 	};
 
 	const resetFields = () => {
-		setSku('');
-		setQty(''); // 0?
+		setSku("");
+		setQty(""); // 0?
 	};
 
 	return (
@@ -51,7 +51,7 @@ const InputForm = ({ validateProductSKU, addToBasket }) => {
 					name="qty"
 					required
 					value={qty}
-					onChange={(e) => setQty( +e.target.value)}
+					onChange={(e) => setQty(+e.target.value)}
 				/>
 			</div>
 
@@ -60,7 +60,11 @@ const InputForm = ({ validateProductSKU, addToBasket }) => {
 				<button onClick={(e) => resetFields()}>Reset</button>
 			</div>
 
-			{invalidSKU && <p className=".warning-message">The product doesn't exist!</p>}
+			{ (invalidSKU && 
+				<span className="warning-message">
+				{ qty>0 ? "The product doesn't exist!" : "The quantity wasn't specified" }
+				</span>
+			)}
 		</form>
 	);
 };
