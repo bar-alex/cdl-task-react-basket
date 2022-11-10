@@ -1,9 +1,12 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 
 // props.validateProductSKU( sku )  -- checks if sku is a product
 // props.addToBasket( {sku, qty} )  -- will do calcs and add it to basket list
 
 const InputForm = ({ validateProductSKU, addToBasket }) => {
+
+	const inputSkuRef = useRef()
+
 	const [sku, setSku] = useState("");
 	const [qty, setQty] = useState(0);
 
@@ -18,12 +21,15 @@ const InputForm = ({ validateProductSKU, addToBasket }) => {
 		if (skuIsValid) {
 			addToBasket({ sku, qty });
 			resetFields();
+		} else {
+			inputSkuRef.current?.focus()
 		}
 	};
 
 	const resetFields = () => {
 		setSku("");
-		setQty(""); // 0?
+		setQty(0); // 0?
+		inputSkuRef.current?.focus()
 	};
 
 	return (
@@ -31,6 +37,7 @@ const InputForm = ({ validateProductSKU, addToBasket }) => {
 			<div>
 				<label htmlFor="sku">SKU: </label>
 				<input
+					ref={inputSkuRef}
 					type="text"
 					id="sku"
 					name="sku"
@@ -46,7 +53,8 @@ const InputForm = ({ validateProductSKU, addToBasket }) => {
 			<div>
 				<label htmlFor="qty">Quantity: </label>
 				<input
-					type="text"
+					type="number"
+					min="1"
 					id="qty"
 					name="qty"
 					required

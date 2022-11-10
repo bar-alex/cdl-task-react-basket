@@ -12,20 +12,15 @@ import {
 	validateProductSKU,
 	calculateTotal,
 } from "./components/functions";
+import ModeBasket from "./components/ModeBasket";
 
-// //const products = JSON.parse( '../data/products.json' );
-// const products = [
-// 	{
-// 		sku: "A",
-// 		price: 50,
-// 		offer: "3 for 130",
-// 		singleOffer: false,
-// 	},
-// ];
 
 const App = () => {
 	// {sku, qty, price, value}
 	const [basket, setBasket] = useState([]);
+
+  // c/s (lower) = condensed/spread
+  const [modeBasket, setModeBasket] = useState('c') 
 
 	// add SKU + qty to basket
 	const addToBasket = ({ sku, qty }) => {
@@ -39,11 +34,7 @@ const App = () => {
 		const product = getProductFromSKU(sku);
 
 		if (product === null) {
-			console.log(
-				"err:addToBasket => SKU code didn't returned a product => ",
-				sku,
-				product
-			);
+			console.log( "err:addToBasket => SKU returned no product => ",sku,product);
 			return;
 		}
 
@@ -60,11 +51,16 @@ const App = () => {
 		calculateTotal();
 	};
 
+
 	const deleteFromBasket = (indexToDelete) =>
 		setBasket([...basket.filter((element, index) => index !== indexToDelete)]);
 
+
 	return (
-		<div className="app-container">
+		<div id="app-container">
+
+      <ModeBasket modeBasket={modeBasket} setModeBasket={setModeBasket} />
+
 			<ProductList />
 
 			<InputForm
@@ -78,7 +74,7 @@ const App = () => {
 				<p className="subtitle"> Basket items</p>
 			)}
 
-			<ul class="list-items">
+			<ul className="list-items">
 				{basket.length > 0 &&
 					basket.map((element, index) => (
 						<li className="basket-line" key={index}>

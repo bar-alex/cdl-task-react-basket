@@ -7,7 +7,7 @@ const ProductList = () => {
 	// console.log("ProductList: products.length = ", products.length);
 
 	return (
-		<details>
+		<details id="product-list">
 			<summary className="subtitle">List of products</summary>
 			<pre>
 				<div>{"SKU  | price | offer      | single "}</div>
