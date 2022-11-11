@@ -1,18 +1,21 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import "./App.css";
 
 import ProductList from "./components/ProductList";
 import InputForm from "./components/InputForm";
+import ModeBasket from "./components/ModeBasket";
+import BasketList from "./components/BasketList";
 import BasketItem from "./components/BasketItem";
+import BasketSavings from "./components/BasketSavings";
 import BasketTotal from "./components/BasketTotal";
 
 import {
-	retrieveProducts,
+	// retrieveProducts,
 	getProductFromSKU,
 	validateProductSKU,
 	calculateTotal,
 } from "./components/functions";
-import ModeBasket from "./components/ModeBasket";
+
 
 
 const App = () => {
@@ -59,7 +62,10 @@ const App = () => {
 	return (
 		<div id="app-container">
 
-      <ModeBasket modeBasket={modeBasket} setModeBasket={setModeBasket} />
+      <ModeBasket 
+        modeBasket={modeBasket} 
+        setModeBasket={setModeBasket} 
+      />
 
 			<ProductList />
 
@@ -68,30 +74,43 @@ const App = () => {
 				addToBasket={addToBasket}
 			/>
 
-			{basket.length === 0 ? (
-				<p className="empty-content-text">The basket is empty</p>
-			) : (
-				<p className="subtitle"> Basket items</p>
-			)}
+      <BasketList basket={basket} modeBasket={modeBasket}>
+        {basket.length > 0 &&
+          basket.map((elem, index) => (
+              <BasketItem
+                key={index}
+                index={index}
+                item={elem}
+                modeBasket={modeBasket}
+                deleteFromBasket={deleteFromBasket}
+              />
+          ))}
+      </BasketList>
 
-			<ul className="list-items">
-				{basket.length > 0 &&
-					basket.map((element, index) => (
-						<li className="basket-line" key={index}>
-							<BasketItem
-								key={index}
-								index={index}
-								item={element}
-								deleteFromBasket={deleteFromBasket}
-							/>
-						</li>
-					))}
-			</ul>
+      {modeBasket==='s' && <BasketSavings basket={basket}/>}
 
-			{/* <p>{calculateTotal(basket).totalValue}</p> */}
-			<BasketTotal basket={basket} />
+      <BasketTotal basket={basket} />
+
 		</div>
 	);
 };
 
 export default App;
+
+
+
+
+{/* <ul className="list-items">
+{basket.length > 0 &&
+  basket.map((elem, index) => (
+    <li className="basket-line" key={index}>
+      <BasketItem
+        key={index}
+        index={index}
+        item={elem}
+        modeBasket={modeBasket}
+        deleteFromBasket={deleteFromBasket}
+      />
+    </li>
+  ))}
+</ul> */}

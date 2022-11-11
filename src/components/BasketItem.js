@@ -1,19 +1,16 @@
-//import React, { useState } from "react";
-
-// index={index}
-// item={element} -- basket object
-// deleteFromBasket={deleteFromBasket}
-
-const BasketItem = ({ index, item, deleteFromBasket }) => {
+const BasketItem = ({ index, item, deleteFromBasket, modeBasket }) => {
 	return (
 		<>
-			<div className="basket-item">
-				<div>{item.sku}</div>
-				<div>{item.qty}</div>
-				<div>£{ (item.price/100).toFixed(2) }</div>
-                <div>£{ (item.value/100).toFixed(2) }</div>
+			<span className="basket-item">{item.sku}</span>
+			<span className="basket-item">£{(item.price / 100).toFixed(2)}</span>
+			<span className="basket-item">{item.qty}</span>
+			<span className="basket-item">£{(item.value / 100).toFixed(2)}</span>
+
+			{modeBasket === "c" && <span className="basket-item">{item.offer}</span>}
+
+			<span className="basket-item">
 				<button onClick={() => deleteFromBasket(index)}>delete</button>
-			</div>
+			</span>
 		</>
 	);
 };

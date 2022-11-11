@@ -9,7 +9,7 @@ const ProductList = () => {
 		<details id="product-list">
 			<summary className="subtitle">List of products</summary>
 
-			<div className="table">
+			<div className="product-grid">
 				<span>SKU</span>
 				<span>Price</span>
 				<span>Offer</span>

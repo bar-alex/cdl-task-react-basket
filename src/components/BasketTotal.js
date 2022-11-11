@@ -1,19 +1,14 @@
-import { calculateTotal } from "./functions";
+import { calculateTotal, offerInPounds } from "./functions";
 
 const BasketTotal = ({ basket }) => {
 	const { totalValue, savings } = calculateTotal(basket);
 	// savings[x] = { sku, offer, normalValue, offerValue }
 
-	// turns "3 for 130" into "3 for £1.30"
-	const offerInPounds = (offerPence) =>
-		offerPence
-			.split(" ")
-			.map((_, idx) => (idx < 2 ? _ : "£" + (_ / 100).toFixed(2)))
-			.join(" ");
+
 
 	return (
 		<div id="basket-total">
-			{savings.length > 0 && <p className="subtitle">Savings from offers: </p>}
+			{/* {savings.length > 0 && <p className="subtitle">Savings from offers: </p>}
 
 			{savings.length > 0 &&
 				savings.map((elem, index) => (
@@ -34,7 +29,7 @@ const BasketTotal = ({ basket }) => {
 							= £{((elem.normalValue - elem.offerValue) / 100).toFixed(2)}{" "}
 						</span>
 					</div>
-				))}
+				))} */}
 
 			<p className="subtitle">Total Value: £{(totalValue / 100).toFixed(2)} </p>
 		</div>

@@ -80,11 +80,12 @@ export const calculateTotal = (basket) => {
 			if (qty >= qtyOffer) {
 				const multiOffer = prod.singleOffer ? 1 : Math.floor(qty / qtyOffer); // if offer not limited to 1, calc how many times will be applied
 				const restQty = prod.singleOffer ? qty - qtyOffer : qty % qtyOffer; // the remaining quantity not used in offers
-				// add over price to total value, and restQty for normal price
-				const offerValue = priceOffer * multiOffer + price * restQty;
-				totalValue += offerValue;
+				// add offer price to total value, and restQty for normal price
+				const offerValue = priceOffer * multiOffer;
+				const restValue = price * restQty;
+				totalValue += offerValue + restValue;
 				// add the offer to savings
-				savings.push({ sku, offer, normalValue, offerValue });
+				savings.push({ sku, offer, normalValue:normalValue-restValue, offerValue });
 				console.log(
 					`calculateTotal => saved another offer in savings: `,
 					savings
@@ -97,3 +98,12 @@ export const calculateTotal = (basket) => {
 
 	return { totalValue, savings };
 };
+
+
+// turns "3 for 130" into "3 for £1.30"
+export const offerInPounds = (offerPence) => 
+	offerPence
+		.split(" ")
+		.map((_, idx) => (idx < 2 ? _ : "£" + (_ / 100).toFixed(2)))
+		.join(" ");
+
