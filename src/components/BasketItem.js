@@ -1,7 +1,7 @@
 const BasketItem = ({ index, item, deleteFromBasket, modeBasket }) => {
 	return (
 		<>
-			<span className="basket-item">{item.sku}</span>
+			<span className="basket-item" key={index}>{item.sku}</span>
 			<span className="basket-item">£{(item.price / 100).toFixed(2)}</span>
 			<span className="basket-item">{item.qty}</span>
 

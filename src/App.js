@@ -58,13 +58,11 @@ const App = () => {
 
   // will switch between condensed and spread
   useEffect( ()=>{
-
     if(modeBasket === 'c') 
       makeBasketCondensed()
-    if(modeBasket == 's')
+    if(modeBasket === 's')
       makeBasketSpread()
-
-  },[modeBasket])
+  },[modeBasket]) // eslint-disable-line react-hooks/exhaustive-deps
 
 
 	// add SKU + qty to basket

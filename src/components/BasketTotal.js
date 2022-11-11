@@ -1,4 +1,4 @@
-import { calculateTotal, offerInPounds } from "./functions";
+import { calculateTotal } from "./functions";
 
 const BasketTotal = ({ basket }) => {
 	const { totalValue, savings } = calculateTotal(basket);
