@@ -1,8 +1,8 @@
 /* @import url("reset.css"); */
 
-
 :root {
-  --outline-color: blueviolet;
+  /* --outline-color: blueviolet; */
+  --outline-color: slategray;
   --selected-backcolor: bisque;
   --selected-color: darkslategrey;
   --dimmed-color: slategrey;
@@ -13,36 +13,48 @@
   --basket-header-color: powderblue;
   --basket-row-color: rgba(176, 224, 230, 0.3);
 
-  /* color:rgba(176, 224, 230, 0.7) ; */
 }
 
 
+* {
+  font-family: "Roboto", sans-serif;
+}
+
+
+body{
+  background-color: whitesmoke;
+}
+
 
 #app-container {
-  margin: 20px auto;
+  margin: 30px auto;
   text-align: center;
   width: clamp(400px, 60vw, 500px);
-  /* width: 34vw; */
-  /* width: 400px; */
-  /* width: clamp(20vw,30vw); */
-  /* padding: 10px; */
-  outline: 2px solid var(--outline-color);
+  outline: 1px solid var(--outline-color);
+
+  border-radius: 5px;
+  overflow: hidden;
+  background-color: white;
+  /* border: 1px solid rgba(0, 0, 0, 0.1); */
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
 }
 
 
 #mode-basket {
-  outline: 2px solid var(--outline-color);
+  outline: 1px solid var(--outline-color);
   padding: 10px 5px;
   display: flex;
   flex-wrap: wrap;
   justify-content: flex-start;
-  margin-bottom: 2px;
+  margin-bottom: 0px;
 }
 #mode-basket p {
   margin: 0px;
   padding: 5px;
   line-height: 1.2;
   flex-grow: 1;
+  margin-bottom: 1px;
+  border: 1px solid rgba(0, 0, 0, 0.2);
 }
 #mode-basket p[sele] {
   background-color: var(--selected-backcolor);
@@ -52,19 +64,18 @@
   text-align: left;
   font-size: .85rem;
   color: var(--dimmed-color);
+  border: none;
 }
 
 
 #product-list {
-  outline: 2px solid var(--outline-color);
+  /* outline: 1px solid var(--outline-color); */
   padding: 10px 5px;
-  /* font-size: .9rem; */
-  /* line-height: 2; */
 }
 #product-list summary {
   text-align: left;
   padding-left: 5px;
-  margin-bottom: 2px;
+  margin-bottom: 0px;
 }
 .product-grid {
   display: grid;
@@ -89,9 +100,9 @@
 
 #input-form {
   /* margin: 10px 0px; */
-  margin: 2px auto;
+  margin: 1px auto;
   padding: 10px 10px;
-  outline: 2px solid var(--outline-color);
+  outline: 1px solid var(--outline-color);
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
@@ -157,12 +168,12 @@
 
 
 #basket-total {
-  outline: 2px solid var(--outline-color);
+  outline: 1px solid var(--outline-color);
   padding: 5;
   background-color: var(--basket-row-color);
   display: flex;
   justify-content: space-evenly;
-  margin: 20px 0px;
+  margin-top: 20px;
 }
 
 

@@ -42,12 +42,11 @@ const App = () => {
           offer: elem.offer, // used by condensed
         }
       } )
-    console.log('makeBasketCondensed -> newBasket: ', newBasket)
 
     setBasket( newBasket )
   }
 
-  
+
   // turns condensed format to spread format
   const makeBasketSpread = () => {
     const newBasket = basket.map( (elem) => {
@@ -67,9 +66,9 @@ const App = () => {
 
   },[modeBasket])
 
+
 	// add SKU + qty to basket
 	const addToBasket = ({ sku, qty }) => {
-		console.log("addToBasket - arguments", sku, qty);
 
 		if (!validateProductSKU(sku) || qty <= 0) {
 			console.log("err:addToBasket => SKU is invalid or qty < 1 => ", sku, qty);
@@ -159,21 +158,3 @@ const App = () => {
 };
 
 export default App;
-
-
-
-
-{/* <ul className="list-items">
-{basket.length > 0 &&
-  basket.map((elem, index) => (
-    <li className="basket-line" key={index}>
-      <BasketItem
-        key={index}
-        index={index}
-        item={elem}
-        modeBasket={modeBasket}
-        deleteFromBasket={deleteFromBasket}
-      />
-    </li>
-  ))}
-</ul> */}

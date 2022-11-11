@@ -7,7 +7,6 @@ export const retrieveProducts = () => jsonProducts;
 // return the product for provided SKU
 export const getProductFromSKU = (productSKU) => {
 	try {
-		console.log(productSKU, typeof productSKU);
 		// const products = retrieveProducts();
 		const products = jsonProducts;
 		//console.log( products );
@@ -53,8 +52,6 @@ export const calculateTotal = (basket) => {
 			: +elem.qty;
 	});
 
-	console.log("calculateTotal => ", skuCollection);
-
 	let totalValue = 0; // total to pay
 	let savings = []; // savings because of offers, {sku, offer, normalValue, offerValue}
 
@@ -74,9 +71,6 @@ export const calculateTotal = (basket) => {
 		} else {
 			const qtyOffer = offer.trim().split(" ")[0]; // get the x from "x for y"
 			const priceOffer = offer.trim().split(" ")[2]; // get the y from "x for y"
-			console.log(
-				`calculateTotal => product sku: ${sku} has offer "${offer}" and I got qtyOffer ${qtyOffer} and priceOffer ${priceOffer} `
-			);
 			// if quantity larger than qtyOffer
 			if (qty >= qtyOffer) {
 				const multiOffer = prod.singleOffer ? 1 : Math.floor(qty / qtyOffer); // if offer not limited to 1, calc how many times will be applied
@@ -87,10 +81,6 @@ export const calculateTotal = (basket) => {
 				totalValue += offerValue + restValue;
 				// add the offer to savings
 				savings.push({ sku, offer, normalValue:normalValue-restValue, offerValue });
-				console.log(
-					`calculateTotal => saved another offer in savings: `,
-					savings
-				);
 			} else {
 				totalValue += normalValue;
 			}
@@ -117,9 +107,6 @@ export const calcSkuValWithOffer = ({sku, qty}) => {
 	} else {
 		const qtyOffer 	 = offer.trim().split(" ")[0]; // get the x from "x for y"
 		const priceOffer = offer.trim().split(" ")[2]; // get the y from "x for y"
-		console.log(
-			`calcSkuValWithOffer => product sku: ${sku} has offer "${offer}" and I got qtyOffer ${qtyOffer} and priceOffer ${priceOffer} `
-		);
 		// if quantity larger than qtyOffer
 		if (qty >= qtyOffer) {
 			const multiOffer = prod.singleOffer ? 1 : Math.floor(qty / qtyOffer); // if offer not limited to 1, calc how many times will be applied
