@@ -15,11 +15,11 @@ const InputForm = ({ validateProductSKU, addToBasket }) => {
 	const handleSubmit = (e) => {
 		e.preventDefault();
 
-		let skuIsValid = validateProductSKU(sku) && qty > 0;
+		let skuIsValid = validateProductSKU(sku) && +qty > 0;
 		setInvalidSKU(!skuIsValid);
 
 		if (skuIsValid) {
-			addToBasket({ sku, qty });
+			addToBasket({ sku, qty:+qty });
 			resetFields();
 		} else {
 			inputSkuRef.current?.focus()
@@ -43,8 +43,6 @@ const InputForm = ({ validateProductSKU, addToBasket }) => {
 					name="sku"
 					required
 					autoComplete="off"
-					// style={{ textTransform: "uppercase" }}
-					// style={ () => "text-transform: uppercase" }
 					value={sku}
 					onChange={(e) => setSku(e.target.value.toString().toUpperCase())}
 				/>
@@ -53,13 +51,12 @@ const InputForm = ({ validateProductSKU, addToBasket }) => {
 			<div>
 				<label htmlFor="qty">Quantity: </label>
 				<input
-					type="number"
-					min="1"
+					type="text"
 					id="qty"
 					name="qty"
 					required
-					value={qty}
-					onChange={(e) => setQty(+e.target.value)}
+					value={qty||""}
+					onChange={(e) => setQty(e.target.value)}
 				/>
 			</div>
 

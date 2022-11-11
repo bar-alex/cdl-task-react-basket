@@ -2,26 +2,33 @@
 import { retrieveProducts } from "./functions";
 
 const ProductList = () => {
-	
 	const products = retrieveProducts();
 	// console.log("ProductList: products.length = ", products.length);
 
 	return (
 		<details id="product-list">
 			<summary className="subtitle">List of products</summary>
-			<pre>
-				<div>{"SKU  | price | offer      | single "}</div>
+
+			<div className="table">
+				<span>SKU</span>
+				<span>Price</span>
+				<span>Offer</span>
+				<span>Just once</span>
 
 				{products.map((el, index) => {
 					return (
-						<div key={index}>
-							{" "}
-							{el.sku.padEnd(4)} | {el.price.toString().padStart(5)} |{" "}
-							{el.offer.padEnd(10)} | { el.singleOffer ? "yes".padEnd(8) : " ".padEnd(8)}
-						</div>
+						<>
+							<span>{el.sku}</span>
+							<span>{el.price}p</span>
+							<span>
+								{el.offer}
+								{el.offer ? "p" : ""}
+							</span>
+							<span>{el.singleOffer ? "yes" : ""}</span>
+						</>
 					);
 				})}
-			</pre>
+			</div>
 		</details>
 	);
 };
