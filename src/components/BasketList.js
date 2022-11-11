@@ -27,9 +27,3 @@ const BasketList = ({ basket, children, modeBasket }) => {
 };
 
 export default BasketList;
-
-
-
-{/* <span className='col-offer'>
-{modeBasket === "c" ? "Offer" : ""}
-</span> */}

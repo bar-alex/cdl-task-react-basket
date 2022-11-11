@@ -1,6 +1,5 @@
 import {
 	calculateTotal,
-    offerInPounds
 } from "./functions";
 
 const BasketSavings = ({basket}) => {
@@ -34,23 +33,3 @@ const BasketSavings = ({basket}) => {
 };
 
 export default BasketSavings;
-
-
-
-{
-	/* <div className="savings-offer" key={index}>
-
-<span> {elem.sku} </span>
-// the offer
-<span> {offerInPounds(elem.offer)} </span>
-// normal value
-<span>
-    ( £{(elem.normalValue / 100).toFixed(2)} - £
-    {(elem.offerValue / 100).toFixed(2)} )
-</span>
-<span>
-    = £{((elem.normalValue - elem.offerValue) / 100).toFixed(2)}{" "}
-</span>
-
-</div> */
-}
