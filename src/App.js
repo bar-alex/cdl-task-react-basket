@@ -23,7 +23,7 @@ const App = () => {
 	// {sku, qty, price, value}
 	const [basket, setBasket] = useState([]);
   // c/s (lower) = condensed/spread
-  const [modeBasket, setModeBasket] = useState('c') 
+  const [modeBasket, setModeBasket] = useState('s') 
 
   // turns the basket into a list with unique SKUs and cumulated quantity
   const makeBasketCondensed = () => {
