@@ -1,0 +1,32 @@
+[
+    {
+        "sku": "A",
+        "price": 50,
+        "offer": "3 for 130",
+        "singleOffer": false
+    },
+    {
+        "sku": "B",
+        "price": 30,
+        "offer": "2 for 45",
+        "singleOffer": false
+    },
+    {
+        "sku": "C",
+        "price": 20,
+        "offer": "",
+        "singleOffer": false
+    },
+    {
+        "sku": "D",
+        "price": 15,
+        "offer": "",
+        "singleOffer": false
+    },
+    {
+        "sku": "E",
+        "price": 9,
+        "offer": "2 for 14",
+        "singleOffer": true
+    }
+]
