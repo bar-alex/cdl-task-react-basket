@@ -3,12 +3,13 @@
 const BasketList = ({ basket, children, modeBasket }) => {
 	return (
 		<div id="basket">
-			<p className="subtitle">Basket items</p>
+			
 
-			{basket.length === 0 && (
-				<p className="empty-content-text">The basket is empty</p>
-			)}
+			{basket.length > 0 //
+				? <p className="subtitle">Basket items</p> 
+				: <p className="empty-content-text">The basket is empty</p>}
 
+			{basket.length > 0 &&
 			<div className={modeBasket === 'c' ? "basket-grid basket-grid-c" : "basket-grid basket-grid-s"}>
 
                 <span className="col-sku">SKU</span>
@@ -20,7 +21,7 @@ const BasketList = ({ basket, children, modeBasket }) => {
 
                 {/* the rows in the basket */}
 				{children}
-			</div>
+			</div>}
 
 		</div>
 	);

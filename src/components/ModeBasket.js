@@ -19,7 +19,7 @@ const ModeBasket = ({ modeBasket, setModeBasket }) => {
 				{modeBasket === "c"
 					? "Amazon style - quantities are cumulated to same SKUs, values calculated from offers"
 					: modeBasket === "s"
-					? "Tesco style - SKUs in order of entry, savings are calculated from the offers and displayed before total"
+					? "Superstore style - SKUs in order of entry, savings are calculated from the offers and displayed before total"
 					: ""}
 			</p>
 		</div>
