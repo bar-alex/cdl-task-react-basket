@@ -1,16 +1,18 @@
 Wasn't clear which way you wanted me to make this, so I've done it both ways: 
 
-I've also added a new flag for the products table, where the offer can be given only one (or two or three) times, not specifying it will apply it for all quantities.
+I've also added a new flag to the products list, where the offer could be given only once.
 
 Spread mode - like in supermarkets
-  - the products are added in the order they are entered, 
-  - the values displayed on the same line are for the entire price, without the offers
-  - the discounts from the offers are calculated at the end, for the cumulated quantity of each product
-  - the total results from the value minus the discounts
+- the products are added in the order they are entered, 
+- the values displayed on the same line are for the entire price, without the offers
+- the discounts from the offers are calculated at the end, for the cumulated quantity of each product
+- the total results from the value minus the discounts
+
 Condensed mode
-  - the quantities are added to the same products in the list, meaning there will be only one instance of the same product
-  - the value is calculated according to the offer and displayed on the same line (the total quantity is on the same line)
-  - there is no need to display the savings because the values have the discounts already   substracted 
+- the quantities are added to the same products in the list, meaning there will be only one instance of the same product
+- the value is calculated according to the offer and displayed on the same line (the total quantity is on the same line)
+- there is no need to display the savings because the values have the discounts already   substracted 
+
 The total will display the full value, the discounts and the total value to pay
 
 
