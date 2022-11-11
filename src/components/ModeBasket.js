@@ -17,9 +17,9 @@ const ModeBasket = ({ modeBasket, setModeBasket }) => {
 			</p>
 			<p>
 				{modeBasket === "c"
-					? "One line per SKU, quantities are cumulated, values include offers"
+					? "Amazon style - quantities are cumulated to same SKUs, values calculated from offers"
 					: modeBasket === "s"
-					? "SKUs in order of entry, values don't include offers, savings are calculated before total"
+					? "Tesco style - SKUs in order of entry, savings are calculated from the offers and displayed before total"
 					: ""}
 			</p>
 		</div>

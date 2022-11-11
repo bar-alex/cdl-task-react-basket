@@ -108,8 +108,8 @@
   justify-content: center;
 }
 
-#input-form div+button {
-  margin-right: 10px;
+#input-form button ~ button {
+  margin-left: 10px;
 }
 
 
@@ -127,7 +127,7 @@
 }
 .basket-grid-c {
   grid-template-columns: repeat(4, 1fr) 2fr 1fr;
-  grid-template-areas: "sku price qty value offer delete";
+  grid-template-areas: "sku price qty offer value delete";
 }
 .basket-grid-s>span:nth-child(-n+5){
   background-color: var(--product-header-color);

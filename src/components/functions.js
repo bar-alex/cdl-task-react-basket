@@ -1,4 +1,5 @@
 import jsonProducts from "../data/products.json";
+// export { jsonProducts as products };
 
 // retrieve the list of products -- {sku, price, offer (x for y), singleOffer} -- for now, from json
 export const retrieveProducts = () => jsonProducts;
@@ -98,6 +99,41 @@ export const calculateTotal = (basket) => {
 
 	return { totalValue, savings };
 };
+
+
+// will calculate the value for an sku and a qty using the offer, if it has any
+export const calcSkuValWithOffer = ({sku, qty}) => {
+	const prod = getProductFromSKU(sku);
+	if (prod === null) {
+		console.log("err:calcSkuValWithOffer => product not found for sku: ", sku);
+		return null
+	}
+	const price = prod.price; // prize in products list
+	const offer = prod.offer; // offer in products list ("x for y")
+	const normalValue = price * qty;	
+	// has no offer? just price * qty
+	if (!prod.offer) {
+		return normalValue; // calc normal value, same as in list
+	} else {
+		const qtyOffer 	 = offer.trim().split(" ")[0]; // get the x from "x for y"
+		const priceOffer = offer.trim().split(" ")[2]; // get the y from "x for y"
+		console.log(
+			`calcSkuValWithOffer => product sku: ${sku} has offer "${offer}" and I got qtyOffer ${qtyOffer} and priceOffer ${priceOffer} `
+		);
+		// if quantity larger than qtyOffer
+		if (qty >= qtyOffer) {
+			const multiOffer = prod.singleOffer ? 1 : Math.floor(qty / qtyOffer); // if offer not limited to 1, calc how many times will be applied
+			const restQty = prod.singleOffer ? qty - qtyOffer : qty % qtyOffer; // the remaining quantity not used in offers
+			// add offer price to total value, and restQty for normal price
+			const offerValue = priceOffer * multiOffer;
+			const restValue = price * restQty;
+			// 
+			return offerValue + restValue;
+		} else {
+			return normalValue;
+		}
+	}
+}
 
 
 // turns "3 for 130" into "3 for £1.30"

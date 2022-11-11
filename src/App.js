@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./App.css";
 
 import ProductList from "./components/ProductList";
@@ -10,10 +10,11 @@ import BasketSavings from "./components/BasketSavings";
 import BasketTotal from "./components/BasketTotal";
 
 import {
-	// retrieveProducts,
+	retrieveProducts,
 	getProductFromSKU,
 	validateProductSKU,
 	calculateTotal,
+  calcSkuValWithOffer,
 } from "./components/functions";
 
 
@@ -21,9 +22,50 @@ import {
 const App = () => {
 	// {sku, qty, price, value}
 	const [basket, setBasket] = useState([]);
-
   // c/s (lower) = condensed/spread
   const [modeBasket, setModeBasket] = useState('c') 
+
+  // turns the basket into a list with unique SKUs and cumulated quantity
+  const makeBasketCondensed = () => {
+    // get an obj with sku as key and total qty as value
+    let uniqueSkuQty = {}
+    basket.forEach( (elem) => uniqueSkuQty[elem.sku] = (uniqueSkuQty[elem.sku] || 0) + elem.qty );
+    const products = retrieveProducts()
+    const newBasket = products
+      .filter( (elem) => elem.sku in uniqueSkuQty )
+      .map( (elem) => {
+        return {
+          sku: elem.sku,
+          qty: uniqueSkuQty[elem.sku],
+          price: elem.price,
+          value: calcSkuValWithOffer({ sku:elem.sku, qty:uniqueSkuQty[elem.sku] }),
+          offer: elem.offer, // used by condensed
+        }
+      } )
+    console.log('makeBasketCondensed -> newBasket: ', newBasket)
+
+    setBasket( newBasket )
+  }
+
+  
+  // turns condensed format to spread format
+  const makeBasketSpread = () => {
+    const newBasket = basket.map( (elem) => {
+      return {...elem,value: elem.price*elem.qty}
+    } )
+    setBasket( newBasket )
+  }
+
+
+  // will switch between condensed and spread
+  useEffect( ()=>{
+
+    if(modeBasket === 'c') 
+      makeBasketCondensed()
+    if(modeBasket == 's')
+      makeBasketSpread()
+
+  },[modeBasket])
 
 	// add SKU + qty to basket
 	const addToBasket = ({ sku, qty }) => {
@@ -41,15 +83,36 @@ const App = () => {
 			return;
 		}
 
-		setBasket([
-			...basket,
-			{
-				sku,
-				qty,
-				price: product.price,
-				value: product.price * qty,
-			},
-		]);
+    if(modeBasket==='s'){
+
+      const newBasket = [
+        ...basket,
+        {
+          sku,
+          qty,
+          price: product.price,
+          value: product.price * qty,  
+          offer: '', // not used  by spread
+        },
+      ]
+      setBasket(newBasket);
+
+    } else if (modeBasket==='c') {
+
+      const condensedQty = basket.filter( (elem) => elem.sku===sku )[0]?.qty || 0;
+      const newBasket = [
+        ...basket.filter( (elem) => elem.sku!==sku ), // without this sku
+        {
+          sku,
+          qty: condensedQty + qty,
+          price: product.price,
+          value: calcSkuValWithOffer({sku, qty:condensedQty + qty}),
+          offer: product.offer, // used by condensed
+        },
+      ]
+      setBasket(newBasket);
+
+    } 
 
 		calculateTotal();
 	};
