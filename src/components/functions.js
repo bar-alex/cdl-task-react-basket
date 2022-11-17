@@ -127,6 +127,6 @@ export const calcSkuValWithOffer = ({sku, qty}) => {
 export const offerInPounds = (offerPence) => 
 	offerPence
 		.split(" ")
-		.map((_, idx) => (idx < 2 ? _ : "£" + (_ / 100).toFixed(2)))
+		.map((val, idx) => (idx < 2 ? val : "£" + (val / 100).toFixed(2)))
 		.join(" ");
 

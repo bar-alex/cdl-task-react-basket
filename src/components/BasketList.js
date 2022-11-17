@@ -4,7 +4,6 @@ const BasketList = ({ basket, children, modeBasket }) => {
 	return (
 		<div id="basket">
 			
-
 			{basket.length > 0 //
 				? <p className="subtitle">Basket items</p> 
 				: <p className="empty-content-text">The basket is empty</p>}
