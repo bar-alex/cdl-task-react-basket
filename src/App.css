@@ -176,7 +176,9 @@ body{
   margin-top: 20px;
 }
 
-
+#basket-total p[data-value="0"] {
+  color: var(--dimmed-color);
+}
 
 
 

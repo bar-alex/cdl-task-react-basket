@@ -10,7 +10,12 @@
 //     });
 //   });
 
-import { getProductFromSKU, validateProductSKU } from "./functions";
+import {
+	getProductFromSKU,
+	validateProductSKU,
+	offerInPounds,
+	calcSkuValWithOffer,
+} from "./functions";
 
 
 describe("Retrieving and validating SKUs", () => {
@@ -32,3 +37,20 @@ describe("Retrieving and validating SKUs", () => {
 });
 
 
+describe("Calculating values", () => {
+	it("turns '3 for 130' into '3 for £1.30'", () => {
+		expect(offerInPounds("3 for 130")).toEqual("3 for £1.30");
+	})
+	it("calculates value by applying offer on SKU=B for 2 items", () => {
+		expect(calcSkuValWithOffer({sku:"B", qty:2})).toEqual(45);
+	})
+	it("calculates value for offer + regular on SKU=B for 3 items", () => {
+		expect(calcSkuValWithOffer({sku:"B", qty:3})).toEqual(75);
+	})
+	it("calculates value by applying offer twice on SKU=B for 4 items", () => {
+		expect(calcSkuValWithOffer({sku:"B", qty:4})).toEqual(90);
+	})	
+	it("calculates value by applying only 1 offer on SKU=E for 4 items", () => {
+		expect(calcSkuValWithOffer({sku:"E", qty:4})).toEqual(32);
+	})
+})
